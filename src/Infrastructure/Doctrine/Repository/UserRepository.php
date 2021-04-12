@@ -15,42 +15,54 @@ class UserRepository extends ServiceEntityRepository
 
     public function getById(int $id): ?UserEntity
     {
-        /** @var ?UserEntity $airport */
-        $airport = $this->find($id);
+        /** @var ?UserEntity $user */
+        $user = $this->find($id);
 
-        return $airport;
+        return $user;
     }
 
     /**
      * @param UserEntity $user
      *
      * @throws ORMException
+     *
+     * @return UserEntity
      */
-    public function delete(UserEntity $user): void
+    public function create(UserEntity $user): UserEntity
+    {
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+        return $user;
+    }
+
+    /**
+     * @param UserEntity $user
+     *
+     * @throws ORMException
+     *
+     * @return UserEntity
+     */
+    public function update(UserEntity $user): UserEntity
+    {
+        $this->getEntityManager()->persist($user);
+        $this->getEntityManager()->flush();
+
+        return $user;
+    }
+
+    /**
+     * @param UserEntity $user
+     *
+     * @throws ORMException
+     *
+     * @return bool
+     */
+    public function delete(UserEntity $user): bool
     {
         $this->getEntityManager()->remove($user);
         $this->getEntityManager()->flush();
-    }
 
-    /**
-     * @param UserEntity $user
-     *
-     * @throws ORMException
-     */
-    public function update(UserEntity $user): void
-    {
-        $this->getEntityManager()->persist($user);
-        $this->getEntityManager()->flush();
-    }
-
-    /**
-     * @param UserEntity $user
-     *
-     * @throws ORMException
-     */
-    public function create(UserEntity $user): void
-    {
-        $this->getEntityManager()->persist($user);
-        $this->getEntityManager()->flush();
+        return (bool) $this->find($user->getId());
     }
 }
