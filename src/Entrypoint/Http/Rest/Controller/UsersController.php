@@ -23,18 +23,38 @@ class UsersController
     }
 
     /**
-     * @Route("/users", name="updateUser", methods="PUT")
+     * @Route("/users/{id}", name="fetchUser", methods="GET")
+     *
+     * @param int $id
+     *
+     * @return JsonResponse
      */
-    public function updateUserAction(): JsonResponse
+    public function fetchUserAction(int $id): JsonResponse
     {
-        return new JsonResponse(['data' => 'Update User'], JsonResponse::HTTP_OK);
+        return new JsonResponse(['data' => 'Create User', 'id' => $id], JsonResponse::HTTP_CREATED);
     }
 
     /**
-     * @Route("/users", name="deleteUser", methods="DELETE")
+     * @Route("/users/{id}", name="updateUser", methods="PUT")
+     *
+     * @param int $id
+     *
+     * @return JsonResponse
      */
-    public function deleteUserAction(): JsonResponse
+    public function updateUserAction(int $id): JsonResponse
     {
-        return new JsonResponse(['data' => 'Delete User'], JsonResponse::HTTP_OK);
+        return new JsonResponse(['data' => 'Update User', 'id' => $id], JsonResponse::HTTP_OK);
+    }
+
+    /**
+     * @Route("/users/{id}", name="deleteUser", methods="DELETE")
+     *
+     * @param int $id
+     *
+     * @return JsonResponse
+     */
+    public function deleteUserAction(int $id): JsonResponse
+    {
+        return new JsonResponse(['data' => 'Delete User', 'id' => $id], JsonResponse::HTTP_OK);
     }
 }
