@@ -63,6 +63,8 @@ class UserRepository extends ServiceEntityRepository
         $this->getEntityManager()->remove($user);
         $this->getEntityManager()->flush();
 
-        return (bool) $this->find($user->getId());
+        $userExists = (bool) $this->find($user->getId());
+
+        return !$userExists;
     }
 }
