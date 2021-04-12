@@ -31,7 +31,7 @@ class UsersController
      */
     public function fetchUserAction(int $id): JsonResponse
     {
-        return new JsonResponse(['data' => 'Create User', 'id' => $id], JsonResponse::HTTP_CREATED);
+        return new JsonResponse(['data' => 'Fetch User', 'id' => $id], JsonResponse::HTTP_CREATED);
     }
 
     /**
