@@ -3,7 +3,7 @@ namespace App\Domain\Context\User\Creation\Exception;
 
 use Exception;
 
-class UserEmailCannotBeEmpty extends Exception
+class UserEmailCannotBeEmptyException extends Exception
 {
     public $message = 'User email cannot be empty';
 }

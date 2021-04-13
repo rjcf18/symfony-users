@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 namespace App\Domain\Context\User\Creation\Validator;
 
-use App\Domain\Context\User\Creation\Exception\UserEmailCannotBeEmpty;
-use App\Domain\Context\User\Creation\Exception\UserNameCannotBeEmpty;
-use App\Domain\Context\User\Creation\Exception\UserPasswordCannotBeEmpty;
-use App\Domain\Context\User\Creation\Exception\UserWithEmailAlreadyExists;
+use App\Domain\Context\User\Creation\Exception\UserEmailCannotBeEmptyException;
+use App\Domain\Context\User\Creation\Exception\UserNameCannotBeEmptyException;
+use App\Domain\Context\User\Creation\Exception\UserPasswordCannotBeEmptyException;
+use App\Domain\Context\User\Creation\Exception\UserWithEmailAlreadyExistsException;
 use App\Domain\Context\User\Creation\RequestModel;
 use App\Domain\Shared\Entity\User;
 
@@ -14,12 +14,12 @@ class Semantic
      * @param RequestModel $useCaseRequest
      * @param ?User $user
      *
-     * @throws UserEmailCannotBeEmpty
-     * @throws UserNameCannotBeEmpty
-     * @throws UserPasswordCannotBeEmpty
-     * @throws UserWithEmailAlreadyExists
-     *
      * @return bool
+     *@throws UserNameCannotBeEmptyException
+     * @throws UserPasswordCannotBeEmptyException
+     * @throws UserWithEmailAlreadyExistsException
+     *
+     * @throws UserEmailCannotBeEmptyException
      */
     public function validate(RequestModel $useCaseRequest, ?User $user): bool
     {
@@ -33,34 +33,34 @@ class Semantic
     /**
      * @param RequestModel $useCaseRequest
      *
-     * @throws UserEmailCannotBeEmpty
-     * @throws UserNameCannotBeEmpty
-     * @throws UserPasswordCannotBeEmpty
+     * @throws UserEmailCannotBeEmptyException
+     * @throws UserNameCannotBeEmptyException
+     * @throws UserPasswordCannotBeEmptyException
      */
     private function validateEmptyFields(RequestModel $useCaseRequest): void
     {
         if (empty($useCaseRequest->getName())) {
-            throw new UserNameCannotBeEmpty();
-        }
-
-        if (empty($useCaseRequest->getPassword())) {
-            throw new UserPasswordCannotBeEmpty();
+            throw new UserNameCannotBeEmptyException();
         }
 
         if (empty($useCaseRequest->getEmail())) {
-            throw new UserEmailCannotBeEmpty();
+            throw new UserEmailCannotBeEmptyException();
+        }
+
+        if (empty($useCaseRequest->getPassword())) {
+            throw new UserPasswordCannotBeEmptyException();
         }
     }
 
     /**
      * @param ?User $user
      *
-     * @throws UserWithEmailAlreadyExists
+     * @throws UserWithEmailAlreadyExistsException
      */
     public function validateUserAlreadyExists(?User $user): void
     {
         if (!empty($user)) {
-            throw new UserWithEmailAlreadyExists();
+            throw new UserWithEmailAlreadyExistsException();
         }
     }
 }

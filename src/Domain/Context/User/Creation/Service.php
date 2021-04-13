@@ -1,10 +1,10 @@
 <?php declare(strict_types=1);
 namespace App\Domain\Context\User\Creation;
 
-use App\Domain\Context\User\Creation\Exception\UserEmailCannotBeEmpty;
-use App\Domain\Context\User\Creation\Exception\UserNameCannotBeEmpty;
-use App\Domain\Context\User\Creation\Exception\UserPasswordCannotBeEmpty;
-use App\Domain\Context\User\Creation\Exception\UserWithEmailAlreadyExists;
+use App\Domain\Context\User\Creation\Exception\UserEmailCannotBeEmptyException;
+use App\Domain\Context\User\Creation\Exception\UserNameCannotBeEmptyException;
+use App\Domain\Context\User\Creation\Exception\UserPasswordCannotBeEmptyException;
+use App\Domain\Context\User\Creation\Exception\UserWithEmailAlreadyExistsException;
 use App\Domain\Context\User\Creation\Validator\Semantic as SemanticValidator;
 use App\Domain\Shared\Entity\User;
 use DateTime;
@@ -26,12 +26,12 @@ class Service implements Handler
     /**
      * @param RequestModel $useCaseRequest
      *
-     * @throws UserEmailCannotBeEmpty
-     * @throws UserNameCannotBeEmpty
-     * @throws UserPasswordCannotBeEmpty
-     * @throws UserWithEmailAlreadyExists
-     *
      * @return ResponseModel
+     *@throws UserNameCannotBeEmptyException
+     * @throws UserPasswordCannotBeEmptyException
+     * @throws UserWithEmailAlreadyExistsException
+     *
+     * @throws UserEmailCannotBeEmptyException
      */
     public function create(RequestModel $useCaseRequest): ResponseModel
     {

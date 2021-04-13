@@ -3,7 +3,7 @@ namespace App\Domain\Context\User\Creation\Exception;
 
 use Exception;
 
-class UserPasswordCannotBeEmpty extends Exception
+class UserPasswordCannotBeEmptyException extends Exception
 {
     public $message = 'User password cannot be empty';
 }
