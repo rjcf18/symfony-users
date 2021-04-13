@@ -26,12 +26,12 @@ class Service implements Handler
     /**
      * @param RequestModel $useCaseRequest
      *
-     * @return ResponseModel
-     *@throws UserNameCannotBeEmptyException
+     * @throws UserNameCannotBeEmptyException
      * @throws UserPasswordCannotBeEmptyException
      * @throws UserWithEmailAlreadyExistsException
-     *
      * @throws UserEmailCannotBeEmptyException
+     *
+     * @return ResponseModel
      */
     public function create(RequestModel $useCaseRequest): ResponseModel
     {
