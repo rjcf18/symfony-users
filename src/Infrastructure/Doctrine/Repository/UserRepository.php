@@ -1,22 +1,31 @@
 <?php declare(strict_types=1);
 namespace App\Infrastructure\Doctrine\Repository;
 
+use App\Domain\Context\User\Creation\UserRepository as UserCreationUserRepository;
 use App\Domain\Shared\Entity\User as UserEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
-class UserRepository extends ServiceEntityRepository
+class UserRepository extends ServiceEntityRepository implements UserCreationUserRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, UserEntity::class);
     }
 
-    public function getById(int $id): ?UserEntity
+    public function findById(int $id): ?UserEntity
     {
         /** @var ?UserEntity $user */
         $user = $this->find($id);
+
+        return $user;
+    }
+
+    public function findByEmail(string $email): ?UserEntity
+    {
+        /** @var ?UserEntity $user */
+        $user = $this->findOneBy(['email' => $email]);
 
         return $user;
     }
