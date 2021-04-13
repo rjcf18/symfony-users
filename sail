@@ -112,7 +112,7 @@ if [ $# -gt 0 ]; then
             sail_is_not_running
         fi
 
-    # Proxy the "test" command to the "php artisan test" Artisan command...
+    # Runs the project tests by running the composer test command...
     elif [ "$1" == "test" ]; then
         shift 1
 
