@@ -4,15 +4,15 @@
 If not already done, [install Docker Compose](https://docs.docker.com/compose/install/)
 
 ## Getting Started
-Run the following commands inside the project folder: 
+In order to set up the project and get it up and running run the following command inside the project folder root: 
 ```
-./sail up -d && ./sail setup-project
+./sail setup-project
 ```
 
-* When the commands finish running, you can start to open http://localhost
-* The commands above already configure the whole project and leave it running
-* If there is any docker command or any php/composer command to run simply use the `sail` script (for example, `./sail composer test`)
-* If you wish to run the tests simply run `./sail composer test`
+* When the command finishes running, you can start to open http://localhost and use the API
+* The command above already configures the whole project and leaves it running.
+* If you wish to run the tests simply run `./sail test` or `./sail composer test`
+* If there is any docker compose command or any php/composer command to run simply use the `sail` script (for example, `./sail composer test` or `./sail ps`)
 
 ## Objective
 * Write a simple API (using the Symfony Framework) to display a list of users, create new users, and change or delete an existing user.
