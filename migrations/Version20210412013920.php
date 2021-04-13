@@ -14,24 +14,68 @@ final class Version20210412013920 extends AbstractMigration
 
     public function up(Schema $schema) : void
     {
-        $this->addSql(
-            "CREATE TABLE IF NOT EXISTS `user` (
-	`id` INT(11) NOT NULL AUTO_INCREMENT,
-	`name` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
-	`email` VARCHAR(255) NOT NULL COLLATE 'utf8_unicode_ci',
-	`password` VARCHAR(64) NOT NULL COLLATE 'utf8_unicode_ci',
-	`created_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	`updated_at` TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-	PRIMARY KEY (`id`),
-    UNIQUE INDEX email (email)
-)
-COLLATE='utf8_unicode_ci'
-ENGINE=InnoDB;"
+        $table = $schema->createTable('user');
+
+        $table->addColumn(
+            'id',
+            'integer',
+            [
+                'autoincrement' => true,
+                'notnull' => true,
+            ]
         );
+        $table->setPrimaryKey(['id']);
+
+        $table->addColumn(
+            'name',
+            'string',
+            [
+                'notnull' => true,
+                'length' => 255,
+            ]
+        );
+
+        $table->addColumn(
+            'email',
+            'string',
+            [
+                'notnull' => true,
+                'length' => 255,
+            ]
+        );
+
+        $table->addColumn(
+            'password',
+            'string',
+            [
+                'notnull' => true,
+                'length' => 64,
+            ]
+        );
+
+        $table->addColumn(
+            'created_at',
+            'datetime',
+            [
+                'notnull' => true,
+                'default' => "CURRENT_TIMESTAMP"
+            ]
+        );
+
+        $table->addColumn(
+            'updated_at',
+            'datetime',
+            [
+                'notnull' => true,
+                'default' => "CURRENT_TIMESTAMP"
+            ]
+        );
+
+        $table->addUniqueIndex(['email'], 'user_email_unique');
     }
 
     public function down(Schema $schema) : void
     {
-        $this->addSql('DROP TABLE `user`');
+        $schema->dropTable('user');
     }
 }
