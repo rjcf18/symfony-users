@@ -29,3 +29,16 @@ services:
 
     # add more service definitions when explicit configuration is needed
     # please note that last definitions always *replace* previous ones
+
+    App\Domain\Context\User\Creation\Service:
+        class: App\Domain\Context\User\Creation\Service
+        public: false
+        arguments:
+            - '@App\Domain\Context\User\Creation\Validator\Semantic'
+            - '@App\Infrastructure\Doctrine\Repository\UserRepository'
+
+    App\Entrypoint\Http\Rest\Controller\UsersController:
+        class: App\Entrypoint\Http\Rest\Controller\UsersController
+        public: true
+        arguments:
+            - '@App\Domain\Context\User\Creation\Service'
