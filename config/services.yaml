@@ -37,8 +37,20 @@ services:
             - '@App\Domain\Context\User\Creation\Validator\Semantic'
             - '@App\Infrastructure\Doctrine\Repository\UserRepository'
 
-    App\Entrypoint\Http\Rest\Controller\UsersController:
-        class: App\Entrypoint\Http\Rest\Controller\UsersController
+    App\Entrypoint\Http\Rest\Controller\Users\CreationController:
+        class: App\Entrypoint\Http\Rest\Controller\Users\CreationController
         public: true
         arguments:
             - '@App\Domain\Context\User\Creation\Service'
+
+    App\Domain\Context\User\Listing\Service:
+        class: App\Domain\Context\User\Listing\Service
+        public: false
+        arguments:
+            - '@App\Infrastructure\Doctrine\Repository\UserRepository'
+
+    App\Entrypoint\Http\Rest\Controller\Users\ListingController:
+        class: App\Entrypoint\Http\Rest\Controller\Users\ListingController
+        public: true
+        arguments:
+            - '@App\Domain\Context\User\Listing\Service'
