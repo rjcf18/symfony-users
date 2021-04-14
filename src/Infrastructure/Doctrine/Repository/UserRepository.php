@@ -2,12 +2,15 @@
 namespace App\Infrastructure\Doctrine\Repository;
 
 use App\Domain\Context\User\Creation\UserRepository as UserCreationUserRepository;
+use App\Domain\Context\User\Listing\UserRepository as UserListingUserRepository;
 use App\Domain\Shared\Entity\User as UserEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
 use Doctrine\Persistence\ManagerRegistry;
 
-class UserRepository extends ServiceEntityRepository implements UserCreationUserRepository
+class UserRepository extends ServiceEntityRepository implements
+    UserCreationUserRepository,
+    UserListingUserRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
@@ -28,6 +31,14 @@ class UserRepository extends ServiceEntityRepository implements UserCreationUser
         $user = $this->findOneBy(['email' => $email]);
 
         return $user;
+    }
+
+    /**
+     * @return UserEntity[]
+     */
+    public function findAll(): array
+    {
+        return $this->findBy([]);
     }
 
     /**
