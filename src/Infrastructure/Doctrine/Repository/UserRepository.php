@@ -3,6 +3,7 @@ namespace App\Infrastructure\Doctrine\Repository;
 
 use App\Domain\Context\User\Creation\UserRepository as UserCreationUserRepository;
 use App\Domain\Context\User\Listing\UserRepository as UserListingUserRepository;
+use App\Domain\Context\User\Find\UserRepository as UserFindUserRepository;
 use App\Domain\Shared\Entity\User as UserEntity;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\ORM\ORMException;
@@ -10,7 +11,8 @@ use Doctrine\Persistence\ManagerRegistry;
 
 class UserRepository extends ServiceEntityRepository implements
     UserCreationUserRepository,
-    UserListingUserRepository
+    UserListingUserRepository,
+    UserFindUserRepository
 {
     public function __construct(ManagerRegistry $registry)
     {

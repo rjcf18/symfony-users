@@ -14,12 +14,12 @@ class Semantic
      * @param RequestModel $useCaseRequest
      * @param ?User $user
      *
-     * @return bool
-     *@throws UserNameCannotBeEmptyException
+     * @throws UserEmailCannotBeEmptyException
+     * @throws UserNameCannotBeEmptyException
      * @throws UserPasswordCannotBeEmptyException
      * @throws UserWithEmailAlreadyExistsException
      *
-     * @throws UserEmailCannotBeEmptyException
+     * @return bool
      */
     public function validate(RequestModel $useCaseRequest, ?User $user): bool
     {

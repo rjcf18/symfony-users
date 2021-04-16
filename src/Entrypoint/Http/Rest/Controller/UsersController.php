@@ -7,18 +7,6 @@ use Symfony\Component\Routing\Annotation\Route;
 class UsersController
 {
     /**
-     * @Route("/users/{id}", name="fetchUser", methods="GET")
-     *
-     * @param int $id
-     *
-     * @return JsonResponse
-     */
-    public function fetchUserAction(int $id): JsonResponse
-    {
-        return new JsonResponse(['data' => 'Fetch User', 'id' => $id], JsonResponse::HTTP_CREATED);
-    }
-
-    /**
      * @Route("/users/{id}", name="updateUser", methods="PUT")
      *
      * @param int $id

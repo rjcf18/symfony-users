@@ -54,3 +54,16 @@ services:
         public: true
         arguments:
             - '@App\Domain\Context\User\Listing\Service'
+
+    App\Domain\Context\User\Find\Service:
+        class: App\Domain\Context\User\Find\Service
+        public: false
+        arguments:
+            - '@App\Domain\Context\User\Find\Validator\Semantic'
+            - '@App\Infrastructure\Doctrine\Repository\UserRepository'
+
+    App\Entrypoint\Http\Rest\Controller\Users\FindController:
+        class: App\Entrypoint\Http\Rest\Controller\Users\FindController
+        public: true
+        arguments:
+            - '@App\Domain\Context\User\Find\Service'
